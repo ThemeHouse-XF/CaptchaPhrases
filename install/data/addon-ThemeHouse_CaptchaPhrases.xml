@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="ThemeHouse_CaptchaPhrases" title="[⌂] Captcha Phrases" version_string="1.0.0" version_id="1447261019" url="http://xf.themehouse.io/" install_callback_class="ThemeHouse_Install" install_callback_method="install" uninstall_callback_class="ThemeHouse_Install" uninstall_callback_method="uninstall">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="th_question_edit_captchaphrases"><![CDATA[<xen:textboxunit label="{xen:phrase question}:" name="th_question" value="{$captchaQuestion.question}" data-liveTitleTemplate="{xen:if {$captchaQuestion.captcha_question_id},
+	'{xen:phrase edit_question}: <em>%s</em>',
+	'{xen:phrase add_new_question}: <em>%s</em>'}">
+	<xen:explain>{xen:phrase th_question_will_be_used_if_blank_captchaphrases}</xen:explain>
+</xen:textboxunit>
+
+<xen:foreach loop="$languages" key="$languageId" value="$language">
+	<xen:textboxunit label="{$phrases.{$languageId}.question}:" name="phrases[{$languageId}]" value="{$phrases.{$languageId}.{$questionPhraseTitle}}" hint="{$languages.{$languageId}.title}" />
+</xen:foreach>]]></template>
+    <template title="th_question_edit_replace_captchaphrases"><![CDATA[	<xen:textboxunit label="{xen:phrase question}:" name="th_replace_question" value="{$captchaQuestion.question}" data-liveTitleTemplate="{xen:if {$captchaQuestion.captcha_question_id},
+		'{xen:phrase edit_question}: <em>%s</em>',
+		'{xen:phrase add_new_question}: <em>%s</em>'}" />
+]]></template>
+  </admin_templates>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="ThemeHouse_CaptchaPhrases_Listener_LoadClassController" callback_method="loadClassController" active="1" hint="" description=""/>
+    <listener event_id="load_class_datawriter" execute_order="10" callback_class="ThemeHouse_CaptchaPhrases_Listener_LoadClassDataWriter" callback_method="loadClassDataWriter" active="1" hint="" description=""/>
+    <listener event_id="load_class_model" execute_order="10" callback_class="ThemeHouse_CaptchaPhrases_Listener_LoadClassModel" callback_method="loadClassModel" active="1" hint="" description=""/>
+    <listener event_id="template_post_render" execute_order="10" callback_class="ThemeHouse_CaptchaPhrases_Listener_TemplatePostRender" callback_method="templatePostRender" active="1" hint="" description=""/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="th_question_will_be_used_if_blank_captchaphrases" version_id="1353801871" version_string="1.0.0"><![CDATA[The above question phrase will be used for any language where the question is left blank below. You should ensure that answers to your questions are included for all the languages that you provide question phrases for.]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications>
+    <modification template="footer" modification_key="th_copyrightNotice_captchaPhrases" description="Copyright notice for [⌂] Captcha Phrases" execution_order="1" enabled="1" action="callback">
+      <find><![CDATA[/{xen:phrase (?:xenforo|extra)_copyright}/]]></find>
+      <replace><![CDATA[ThemeHouse_Listener_InitDependencies::copyrightNotice]]></replace>
+    </modification>
+  </public_template_modifications>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
